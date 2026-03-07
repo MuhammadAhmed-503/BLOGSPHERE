@@ -51,7 +51,7 @@ export default function SubscribePage() {
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Enter your email below to receive our latest content directly in your inbox.
-            We'll send you a verification email to confirm your subscription.
+            We&apos;ll send you a verification email to confirm your subscription.
           </p>
           <SubscribeForm />
         </div>
@@ -89,7 +89,7 @@ export default function SubscribePage() {
                 How often will I receive emails?
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                You'll receive an email whenever we publish a new article. We typically publish 2-3 times per week, so you won't be overwhelmed with emails.
+                You&apos;ll receive an email whenever we publish a new article. We typically publish 2-3 times per week, so you won&apos;t be overwhelmed with emails.
               </p>
             </div>
             <div>

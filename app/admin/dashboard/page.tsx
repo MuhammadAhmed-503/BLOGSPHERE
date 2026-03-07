@@ -97,7 +97,7 @@ export default async function AdminDashboard() {
           Dashboard
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Welcome back! Here's what's happening with your blog.
+          Welcome back! Here&apos;s what&apos;s happening with your blog.
         </p>
       </div>
 

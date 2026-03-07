@@ -17,7 +17,7 @@ export interface CreateCommentData {
 
 // Plain JS object shape returned by `.lean()` (does not include Mongoose Document methods)
 export interface LeanComment {
-  _id: any; // ObjectId from Mongoose
+  _id: unknown; // ObjectId from Mongoose
   blogId: string;
   parentCommentId?: string | null;
   name: string;

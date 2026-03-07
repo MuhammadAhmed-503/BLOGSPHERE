@@ -51,7 +51,7 @@ export default function AboutPage() {
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           A production-grade, scalable blogging platform built with modern best practices.
-          This is not a demo project—it's designed to handle real-world traffic and serve
+          This is not a demo project—it&apos;s designed to handle real-world traffic and serve
           100,000+ users with optimal performance and security.
         </p>
       </div>

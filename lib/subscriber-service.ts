@@ -10,7 +10,7 @@ import { sendVerificationEmail, sendNewBlogNotification } from '@/lib/email';
 
 // Plain JS object shape returned by `.lean()`
 export interface LeanSubscriber {
-  _id: any; // ObjectId from Mongoose
+  _id: unknown; // ObjectId from Mongoose
   email: string;
   isVerified: boolean;
   verificationToken?: string;

@@ -131,8 +131,7 @@ export class PushNotificationService {
    */
   static async notifyNewBlog(
     blogTitle: string,
-    blogSlug: string,
-    _excerpt: string
+    blogSlug: string
   ): Promise<{ sent: number; failed: number }> {
     return this.sendToAll({
       title: '📝 New Blog Post Published!',

@@ -27,7 +27,7 @@ export default function SubscribeForm() {
       } else {
         toast.error(data.error || 'Subscription failed');
       }
-    } catch (error) {
+    } catch {
       toast.error('An error occurred. Please try again.');
     } finally {
       setLoading(false);

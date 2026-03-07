@@ -9,7 +9,7 @@ import type { IBlog } from '@/models/Blog';
 
 // Mongoose's LeanDocument type may not be available in all installed @types/mongoose
 // Define a flexible lean result type for plain JS objects returned by `.lean()`
-type LeanBlog = Partial<IBlog> & Record<string, any>;
+type LeanBlog = Partial<IBlog> & Record<string, unknown>;
 import { calculateReadingTime, generateSlug, extractExcerpt } from '@/lib/utils';
 
 export interface CreateBlogData {
@@ -51,7 +51,7 @@ export class BlogService {
     await connectDB();
 
     // Generate slug from title
-    let slug = generateSlug(data.title);
+    const slug = generateSlug(data.title);
     
     // Ensure slug uniqueness
     let counter = 1;
@@ -95,7 +95,7 @@ export class BlogService {
 
     // If title is being updated, regenerate slug
     if (data.title && !data.slug) {
-      let slug = generateSlug(data.title);
+      const slug = generateSlug(data.title);
       
       // Ensure slug uniqueness
       let counter = 1;

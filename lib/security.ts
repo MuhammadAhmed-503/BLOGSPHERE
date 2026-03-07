@@ -119,6 +119,7 @@ export function generateToken(length: number = 32): string {
     }
   } else {
     // Fallback for Node.js
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const nodeCrypto = require('crypto');
     const bytes = nodeCrypto.randomBytes(length);
     for (let i = 0; i < length; i++) {

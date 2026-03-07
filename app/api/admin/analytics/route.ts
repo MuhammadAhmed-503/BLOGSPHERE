@@ -20,7 +20,7 @@ import {
  * GET /api/admin/analytics
  * Get dashboard analytics (admin only)
  */
-export async function GET(_request: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     if (!session || session.user.role !== 'admin') {

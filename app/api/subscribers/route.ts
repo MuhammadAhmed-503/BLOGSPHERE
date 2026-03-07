@@ -23,7 +23,7 @@ const subscribeSchema = z.object({
  * GET /api/subscribers
  * Get all subscribers (admin only)
  */
-export async function GET(_request: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     if (!session || session.user.role !== 'admin') {
