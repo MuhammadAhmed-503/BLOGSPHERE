@@ -58,8 +58,8 @@ npm install
 The project includes a `.env.local` file with your MongoDB URI. Update the following variables:
 
 ```env
-# MongoDB (Already configured)
-MONGODB_URI=mongodb+srv://23011598133_db_user:osmVtngrMnn8htwo@cluster0.3aeyape.mongodb.net/?appName=Cluster0
+# MongoDB
+MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/YOUR_DATABASE?retryWrites=true&w=majority
 
 # NextAuth
 NEXTAUTH_URL=http://localhost:3000
@@ -270,5 +270,6 @@ Built with modern web technologies and best practices for production use.
 ---
 
 **Made with ❤️ for scalable, production-ready applications**
-#   B L O G S P H E R E  
+#   B L O G S P H E R E 
+ 
  

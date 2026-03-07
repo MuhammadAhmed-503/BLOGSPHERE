@@ -46,7 +46,7 @@ In Vercel project settings, add these environment variables:
 
 ```env
 # MongoDB
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/blog-saas?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/blog-saas?retryWrites=true&w=majority
 
 # NextAuth
 NEXTAUTH_URL=https://yourdomain.com

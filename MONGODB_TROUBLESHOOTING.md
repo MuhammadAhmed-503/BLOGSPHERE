@@ -42,7 +42,7 @@ MongoServerError: bad auth
 **Solution:**
 1. Verify your MongoDB URI in `.env.local`:
    ```
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database?retryWrites=true&w=majority
+   MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/YOUR_DATABASE?retryWrites=true&w=majority
    ```
 
 2. Check credentials:
@@ -79,7 +79,7 @@ MongooseServerSelectionError: getaddrinfo ENOTFOUND
 1. **Check your internet connection**
 2. **Verify MongoDB URI format:**
    ```
-   mongodb+srv://username:password@cluster.mongodb.net/dbname
+   mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/YOUR_DATABASE
    ```
 3. **Ensure cluster is running** (not paused in Atlas)
 4. **Check firewall settings:**
