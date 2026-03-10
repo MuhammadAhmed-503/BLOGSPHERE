@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"tailwindCSS.emmetCompletions": true,
+		"files.associations": {
+			"*.css": "tailwindcss"
+		},
+		"liveServer.settings.multiRootWorkspaceName": "Sister Birthday"
+	}
+}

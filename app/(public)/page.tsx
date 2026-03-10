@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { BlogService } from '@/lib/blog-service';
 import { formatDate } from '@/lib/utils';
 import { Clock, Calendar, TrendingUp, Star } from 'lucide-react';
@@ -67,10 +68,11 @@ export default async function HomePage() {
                   className="card overflow-hidden group"
                 >
                   <div className="h-48 relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                    <img
-                      src={blog.coverImage}
-                      alt={blog.title}
-                      className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    <Image
+                      src={blog.coverImage || ''}
+                      alt={blog.title || 'Featured blog cover'}
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-6">
@@ -121,10 +123,11 @@ export default async function HomePage() {
                 className="card overflow-hidden group"
               >
                 <div className="aspect-video relative overflow-hidden bg-gray-200 dark:bg-gray-800">
-                  <img
-                    src={blog.coverImage}
-                    alt={blog.title}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                  <Image
+                    src={blog.coverImage || ''}
+                    alt={blog.title || 'Latest blog cover'}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-6">

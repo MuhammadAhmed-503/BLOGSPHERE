@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { BlogService } from '@/lib/blog-service';
 import { validatePagination } from '@/lib/utils';
 import { formatDate } from '@/lib/utils';
@@ -139,11 +140,12 @@ export default async function BlogListPage({
                     href={`/blog/${blog.slug}`}
                     className="card overflow-hidden flex flex-col sm:flex-row group"
                   >
-                    <div className="sm:w-64 h-48 bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 flex items-center justify-center">
-                      <img
-                        src={blog.coverImage}
-                        alt={blog.title}
-                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    <div className="sm:w-64 h-48 bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 flex items-center justify-center relative">
+                      <Image
+                        src={blog.coverImage || ''}
+                        alt={blog.title || 'Blog cover'}
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-6 flex-grow">

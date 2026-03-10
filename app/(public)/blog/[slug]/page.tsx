@@ -4,6 +4,7 @@ import { Calendar, Clock, Eye, Share2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { marked } from 'marked';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import CommentsSection from '@/components/CommentsSection';
 
 export const revalidate = 3600; // Revalidate every hour
@@ -114,13 +115,16 @@ export default async function BlogDetailPage({
         </div>
 
         {/* Cover Image */}
-        <div className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 mb-8 flex items-center justify-center max-h-[50vh]">
-          <img
-            src={blog.coverImage}
-            alt={blog.title}
-            className="w-full h-full object-contain max-h-[50vh]"
-          />
-        </div>
+        {blog.coverImage && (
+          <div className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 mb-8 flex items-center justify-center max-h-[50vh] relative h-[50vh]">
+            <Image
+              src={blog.coverImage || ''}
+              alt={blog.title || 'Blog cover image'}
+              fill
+              className="object-contain"
+            />
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -181,11 +185,12 @@ export default async function BlogDetailPage({
                 href={`/blog/${relatedBlog.slug}`}
                 className="card overflow-hidden group"
               >
-                <div className="aspect-video bg-gray-200 dark:bg-gray-800 overflow-hidden">
-                  <img
-                    src={relatedBlog.coverImage}
-                    alt={relatedBlog.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                <div className="aspect-video bg-gray-200 dark:bg-gray-800 overflow-hidden relative">
+                  <Image
+                    src={relatedBlog.coverImage || ''}
+                    alt={relatedBlog.title || 'Related blog cover'}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-4">

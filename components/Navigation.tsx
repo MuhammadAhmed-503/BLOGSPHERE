@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { Moon, Sun, Menu, X, User, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -52,7 +53,7 @@ export default function Navigation() {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <img src="/logo.svg" alt="BlogSphere Logo" className="h-10 w-10" />
+            <Image src="/logo.svg" alt="BlogSphere Logo" width={40} height={40} />
             <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
               BlogSphere
             </span>

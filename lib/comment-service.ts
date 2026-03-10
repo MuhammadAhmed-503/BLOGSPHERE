@@ -168,13 +168,4 @@ export class CommentService {
 
     return count;
   }
-
-  /**
-   * Approve a comment (deprecated - kept for backward compatibility)
-   */
-  static async approveComment(commentId: string): Promise<IComment | null> {
-    // No longer needed since all comments are auto-approved
-    await connectDB();
-    return await Comment.findById(commentId);
-  }
 }

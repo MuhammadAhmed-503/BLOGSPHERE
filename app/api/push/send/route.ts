@@ -43,8 +43,7 @@ export async function POST(request: NextRequest) {
 
     const result = await PushNotificationService.notifyNewBlog(
       validation.data.blogTitle,
-      validation.data.blogSlug,
-      validation.data.excerpt
+      validation.data.blogSlug
     );
 
     return successResponse(

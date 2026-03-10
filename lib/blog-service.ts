@@ -82,7 +82,7 @@ export class BlogService {
       readingTime,
     });
 
-    return blog.toObject ? blog.toObject() as LeanBlog : (blog as unknown as LeanBlog);
+    return blog.toObject ? (blog.toObject() as unknown as LeanBlog) : (blog as unknown as LeanBlog);
   }
 
   /**

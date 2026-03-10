@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, Github, Twitter, Linkedin } from 'lucide-react';
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img src="/logo.svg" alt="BlogSphere Logo" className="h-10 w-10" />
+              <Image src="/logo.svg" alt="BlogSphere Logo" width={40} height={40} />
               <h3 className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                 BlogSphere
               </h3>

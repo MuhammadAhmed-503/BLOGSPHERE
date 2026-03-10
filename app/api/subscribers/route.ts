@@ -2,7 +2,6 @@
  * Subscribers API Routes
  */
 
-import { NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { SubscriberService } from '@/lib/subscriber-service';
