@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+/backend/node_modules
 /.pnp
 .pnp.js
 
@@ -12,6 +13,7 @@
 
 # production
 /build
+/backend/dist
 
 # misc
 .DS_Store
@@ -26,6 +28,8 @@ yarn-error.log*
 .env
 .env*.local
 .env.production
+/backend/.env
+/backend/.env.local
 
 # vercel
 .vercel
