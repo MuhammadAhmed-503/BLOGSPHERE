@@ -4,11 +4,11 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "seed": "tsx src/scripts/seed.ts",
-    "reset:views": "tsx src/scripts/resetViews.ts"
+    "dev": "node server.js",
+    "build": "node -e \"console.log('No backend build step required')\"",
+    "start": "node server.js",
+    "seed": "node src/scripts/seed.js",
+    "reset:views": "node src/scripts/resetViews.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

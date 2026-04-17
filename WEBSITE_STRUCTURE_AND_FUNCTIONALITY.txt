@@ -1,0 +1,191 @@
+BLOGSPHERE - WEBSITE STRUCTURE AND FUNCTIONALITY
+
+Note:
+- This document lists folders and files in the source workspace.
+- Dependency/build folders like node_modules and dist are not documented as source code.
+- Each item has one primary functionality.
+
+ROOT FOLDERS
+- .vscode/ : Editor workspace settings for VS Code.
+- api/ : Vercel serverless API entrypoints.
+- backend/ : Express + MongoDB backend API and business logic.
+- frontend/ : Vite + React frontend web application.
+
+ROOT FILES
+- .env.example : Example environment variables for root-level setup.
+- .env.local : Local environment variables for development.
+- .eslintrc.js : Linting configuration for code quality rules.
+- .gitignore : Git ignore rules to exclude generated/secret files.
+- .vercelignore : Vercel ignore rules for deployment upload filtering.
+- Blog Saas.code-workspace : VS Code multi-root workspace definition.
+- package-lock.json : Exact dependency lockfile for reproducible installs.
+- package.json : Root scripts and shared dependency definitions.
+- README.md : Project documentation and setup instructions.
+- vercel.json : Vercel deployment/build/route configuration.
+- WEBSITE_STRUCTURE_AND_FUNCTIONALITY.txt : Structure and functionality reference document.
+
+VSCODE
+- .vscode/settings.json : Local editor settings for this workspace.
+
+API (VERCEL)
+- api/[...path].ts : Catch-all serverless handler that boots backend app and serves API routes.
+
+BACKEND FOLDER
+- backend/.env.example : Backend-specific environment variable template.
+- backend/package.json : Backend package scripts and dependency manifest.
+- backend/tsconfig.json : TypeScript compiler config for backend.
+
+BACKEND SOURCE
+- backend/src/app.ts : Creates and configures the Express app, middleware, and routes.
+- backend/src/index.ts : Starts the backend server process for local runtime.
+- backend/src/validators.ts : Shared request validation schemas/rules.
+
+BACKEND CONFIG
+- backend/src/config/database.ts : MongoDB connection initialization and handling.
+- backend/src/config/env.ts : Environment variable loading, parsing, and health checks.
+
+BACKEND DATA
+- backend/src/data/seedPosts.ts : Seed post dataset used for initial content bootstrap.
+
+BACKEND MIDDLEWARE
+- backend/src/middleware/auth.ts : JWT/auth role protection middleware.
+- backend/src/middleware/errorHandler.ts : Centralized error and not-found handlers.
+- backend/src/middleware/validate.ts : Request payload validation middleware wrapper.
+
+BACKEND MODELS
+- backend/src/models/Comment.ts : Mongoose model/schema for blog comments.
+- backend/src/models/ContactMessage.ts : Mongoose model/schema for contact messages.
+- backend/src/models/Post.ts : Mongoose model/schema for blog posts.
+- backend/src/models/PushSubscription.ts : Mongoose model/schema for web push subscribers.
+- backend/src/models/SiteSetting.ts : Mongoose model/schema for site configuration.
+- backend/src/models/Subscription.ts : Mongoose model/schema for newsletter subscriptions.
+- backend/src/models/User.ts : Mongoose model/schema for users/admin accounts.
+
+BACKEND ROUTES
+- backend/src/routes/admin.ts : Admin CRUD/API endpoints for protected operations.
+- backend/src/routes/auth.ts : Authentication endpoints (login/register/token flows).
+- backend/src/routes/contact.ts : Contact form submission endpoints.
+- backend/src/routes/health.ts : Health-check endpoints for uptime monitoring.
+- backend/src/routes/public.ts : Public blog/content endpoints for frontend.
+- backend/src/routes/push.ts : Web push subscription/notification endpoints.
+- backend/src/routes/uploads.ts : File upload endpoints (media handling).
+
+BACKEND SCRIPTS
+- backend/src/scripts/resetViews.ts : Script to reset post view counters/analytics values.
+- backend/src/scripts/seed.ts : Script to seed database with starter content.
+
+BACKEND SERVICES
+- backend/src/services/bootstrap.ts : Startup bootstrap tasks for initial app state.
+- backend/src/services/cloudinary.ts : Cloudinary media upload/service integration.
+- backend/src/services/email.ts : SMTP email sending service logic.
+- backend/src/services/push.ts : Web push notification sending service.
+
+BACKEND TYPES
+- backend/src/types/express.d.ts : Express type augmentation for custom request fields.
+
+BACKEND UTILS
+- backend/src/utils/appError.ts : Custom application error class/helpers.
+- backend/src/utils/asyncHandler.ts : Async route wrapper for error propagation.
+- backend/src/utils/jwt.ts : JWT creation/verification utility functions.
+- backend/src/utils/pagination.ts : Pagination helpers for list endpoints.
+- backend/src/utils/serialize.ts : Serialization helpers for API response shaping.
+- backend/src/utils/slug.ts : Slug generation/normalization utility functions.
+
+FRONTEND FOLDER
+- frontend/.env.example : Frontend environment variable template.
+- frontend/.env.local : Local frontend environment variables.
+- frontend/index.html : Vite HTML shell for app mounting.
+- frontend/postcss.config.js : PostCSS pipeline configuration.
+- frontend/tailwind.config.js : Tailwind theme/content configuration.
+- frontend/tsconfig.json : TypeScript compiler settings for frontend.
+- frontend/tsconfig.tsbuildinfo : TypeScript incremental build cache metadata.
+- frontend/vite-env.d.ts : Vite TypeScript environment type definitions.
+- frontend/vite.config.ts : Vite build/dev server configuration.
+
+FRONTEND PUBLIC FOLDER
+- frontend/public/ : Static assets served directly by frontend host.
+
+FAVICON AND IMAGE ASSETS (FRONTEND PUBLIC)
+- frontend/public/android-chrome-192x192.png : PWA icon for Android homescreen (192px).
+- frontend/public/android-chrome-512x512.png : PWA icon for Android homescreen (512px).
+- frontend/public/apple-touch-icon.png : iOS home screen app icon.
+- frontend/public/favicon-16x16.png : Small browser tab favicon (16px).
+- frontend/public/favicon-32x32.png : Standard browser favicon (32px).
+- frontend/public/favicon.ico : Multi-size ICO favicon for broad browser support.
+- frontend/public/favicon.svg : Vector favicon for modern browsers.
+- frontend/public/logo.svg : Website logo graphic asset.
+- frontend/public/site.webmanifest : PWA manifest metadata for install behavior.
+- frontend/public/sw.js : Service worker script for offline/caching behavior.
+
+FRONTEND PUBLIC ASSETS SUBFOLDER
+- frontend/public/assets/ : Additional static icon/manifest bundle.
+- frontend/public/assets/android-chrome-192x192.png : Alternate Android icon (192px).
+- frontend/public/assets/android-chrome-512x512.png : Alternate Android icon (512px).
+- frontend/public/assets/apple-touch-icon.png : Alternate iOS app icon.
+- frontend/public/assets/favicon-16x16.png : Alternate small favicon (16px).
+- frontend/public/assets/favicon-32x32.png : Alternate standard favicon (32px).
+- frontend/public/assets/favicon.ico : Alternate ICO favicon file.
+- frontend/public/assets/favicon.png : PNG favicon variant for compatibility.
+- frontend/public/assets/README.md : Notes/documentation for asset files.
+- frontend/public/assets/site.webmanifest : Alternate manifest definition.
+
+FRONTEND SOURCE
+- frontend/src/App.tsx : Main route/layout composition for the React app.
+- frontend/src/main.tsx : React entrypoint that mounts app to DOM.
+- frontend/src/styles.css : Global styles and Tailwind/CSS customizations.
+- frontend/src/types.ts : Shared TypeScript interfaces/types for frontend data.
+
+FRONTEND COMPONENTS
+- frontend/src/components/ : Reusable UI component library.
+- frontend/src/components/AuthModal.tsx : Authentication modal UI.
+- frontend/src/components/CommentSection.tsx : Comment listing and submission UI.
+- frontend/src/components/Footer.tsx : Global footer component.
+- frontend/src/components/Layout.tsx : Shared page layout wrapper.
+- frontend/src/components/Navigation.tsx : Site navigation/header component.
+- frontend/src/components/SubscribeForm.tsx : Newsletter subscription form component.
+
+FRONTEND ADMIN COMPONENTS
+- frontend/src/components/admin/ : Admin dashboard-specific reusable components.
+- frontend/src/components/admin/AdminLayout.tsx : Main admin panel layout shell.
+- frontend/src/components/admin/AdminPageHeader.tsx : Standard admin page heading/actions bar.
+- frontend/src/components/admin/AdminRouteGuard.tsx : Client-side route guard for admin access.
+- frontend/src/components/admin/AdminSidebar.tsx : Admin navigation sidebar.
+- frontend/src/components/admin/AdminStatCard.tsx : Statistics summary card component.
+- frontend/src/components/admin/AdminTopbar.tsx : Top navigation bar for admin pages.
+- frontend/src/components/admin/BlogEditorForm.tsx : Blog create/edit form UI.
+- frontend/src/components/admin/RichTextEditor.tsx : Rich text content editor integration.
+- frontend/src/components/admin/ToggleSwitch.tsx : Reusable toggle switch input component.
+
+FRONTEND DATA
+- frontend/src/data/ : Static data/constants for frontend screens.
+
+FRONTEND HOOKS
+- frontend/src/hooks/useThemeMode.ts : Custom hook to manage light/dark theme mode state.
+
+FRONTEND LIB
+- frontend/src/lib/adminApi.ts : Admin-focused API client methods.
+- frontend/src/lib/adminSchemas.ts : Admin form validation schemas/types.
+- frontend/src/lib/api.ts : Public/general API client methods.
+- frontend/src/lib/auth.ts : Auth token/session helper functions.
+- frontend/src/lib/utils.ts : Shared utility helpers used by frontend.
+
+FRONTEND PAGES
+- frontend/src/pages/ : Public route page components.
+- frontend/src/pages/AboutPage.tsx : About page content and layout.
+- frontend/src/pages/BlogDetailPage.tsx : Single blog post details page.
+- frontend/src/pages/BlogListPage.tsx : Blog listing/archive page.
+- frontend/src/pages/HomePage.tsx : Homepage with featured/latest content.
+- frontend/src/pages/NotFoundPage.tsx : 404 fallback page.
+- frontend/src/pages/SubscribePage.tsx : Newsletter subscription page.
+
+FRONTEND ADMIN PAGES
+- frontend/src/pages/admin/ : Admin route page components.
+- frontend/src/pages/admin/BlogEditorPage.tsx : Shared blog editor page wrapper.
+- frontend/src/pages/admin/BlogsPage.tsx : Admin blogs listing/management page.
+- frontend/src/pages/admin/CommentsPage.tsx : Admin comment moderation page.
+- frontend/src/pages/admin/CreateBlogPage.tsx : Admin create-new-blog page.
+- frontend/src/pages/admin/DashboardPage.tsx : Admin dashboard overview page.
+- frontend/src/pages/admin/EditBlogPage.tsx : Admin edit-existing-blog page.
+- frontend/src/pages/admin/LoginPage.tsx : Admin login page.
+- frontend/src/pages/admin/SettingsPage.tsx : Admin site settings management page.
+- frontend/src/pages/admin/SubscribersPage.tsx : Admin newsletter subscribers management page.
