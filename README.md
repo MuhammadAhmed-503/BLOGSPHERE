@@ -1,6 +1,6 @@
 # Blog SaaS Platform - Production Ready
 
-A production-grade, scalable blogging platform built with Next.js 14, TypeScript, MongoDB, and modern best practices.
+A production-grade, scalable blogging platform built with a Vite + React frontend, an Express backend, MongoDB, and modern best practices.
 
 ## 🚀 Features
 
@@ -16,21 +16,21 @@ A production-grade, scalable blogging platform built with Next.js 14, TypeScript
 - ✅ **Responsive Design**: Mobile-first, fully responsive UI
 
 ### Technical Features
-- ✅ **TypeScript**: Strict mode enabled, no `any` types
+- ✅ **Frontend Build**: Vite-powered static app optimized for Vercel
 - ✅ **MongoDB**: Optimized indexes and connection pooling
-- ✅ **NextAuth**: Secure authentication with JWT
+- ✅ **Authentication**: JWT-based secure admin access
 - ✅ **Rate Limiting**: API route protection
 - ✅ **Input Sanitization**: XSS and injection prevention
-- ✅ **Image Optimization**: Next.js Image component with Cloudinary
+- ✅ **Image Uploads**: Cloudinary-powered media handling
 - ✅ **Markdown Support**: Full markdown rendering for blog posts
-- ✅ **ISR**: Incremental Static Regeneration for optimal performance
 
 ## 📦 Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript (Strict Mode)
+- **Frontend**: Vite + React
+- **Backend**: Express.js
+- **Language**: JavaScript
 - **Database**: MongoDB with Mongoose ODM
-- **Authentication**: NextAuth.js
+- **Authentication**: JWT
 - **Styling**: Tailwind CSS
 - **Validation**: Zod
 - **Email**: Nodemailer
@@ -49,8 +49,9 @@ A production-grade, scalable blogging platform built with Next.js 14, TypeScript
 
 1. **Clone and Install**
 ```bash
-cd "c:\Web\Blog Saas"
-npm install
+cd "c:\Web\Blog Saas - Copy - Copy"
+npm install --prefix frontend
+npm install --prefix backend
 ```
 
 2. **Configure Environment Variables**
@@ -61,10 +62,13 @@ The project includes a `.env.local` file with your MongoDB URI. Update the follo
 # MongoDB
 MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/YOUR_DATABASE?retryWrites=true&w=majority
 
-# NextAuth
-NEXTAUTH_URL=http://localhost:3000
+# App URLs
+NEXTAUTH_URL=http://localhost:5173
 NEXTAUTH_SECRET=your-secret-key-change-this
 # Generate with: openssl rand -base64 32
+
+APP_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:5173
 
 # Admin Credentials
 ADMIN_EMAIL=admin@blogplatform.com
@@ -95,12 +99,34 @@ npx web-push generate-vapid-keys
 ```
 Copy the output to your `.env.local` file.
 
-4. **Run Development Server**
+4. **Run Development Servers**
 ```bash
 npm run dev
+npm run backend:dev
 ```
 
-Visit http://localhost:3000
+## Vercel Deployment
+
+The project is configured for Vercel with a static frontend build and a serverless API entrypoint.
+
+1. Set these environment variables in Vercel:
+```env
+VITE_API_URL=/api
+MONGODB_URI=...
+JWT_SECRET=...
+ADMIN_EMAIL=...
+ADMIN_PASSWORD=...
+FRONTEND_URL=https://your-vercel-domain.vercel.app
+APP_URL=https://your-vercel-domain.vercel.app
+```
+
+2. Deploy from the repository root. Vercel uses `vercel.json` to:
+- install frontend and backend dependencies
+- build `frontend/` into `frontend/dist`
+- route `/api/*` requests to `api/index.js`
+- serve the React app for all other routes
+
+For local development, open the frontend at http://localhost:5173 and the backend at http://localhost:5000.
 
 ## 🔐 Admin Access
 
@@ -137,6 +163,8 @@ middleware.ts          # Route protection
 ```
 
 ## 🚢 Deployment
+
+The production deployment target is Vercel.
 
 ### Vercel (Recommended)
 

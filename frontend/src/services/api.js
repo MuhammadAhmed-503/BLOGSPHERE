@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api';
+const inFlightPostRequests = new Map();
 function toQueryString(query) {
 	const params = new URLSearchParams();
 	for (const [key, value] of Object.entries(query)) {
@@ -40,7 +41,18 @@ export async function fetchPosts(options) {
 	return request(`/public/posts${query}`);
 }
 export async function fetchPostBySlug(slug) {
-	return request(`/public/posts/${encodeURIComponent(slug)}`);
+	if (inFlightPostRequests.has(slug)) {
+		return inFlightPostRequests.get(slug);
+	}
+	const pendingRequest = request(`/public/posts/${encodeURIComponent(slug)}`);
+	inFlightPostRequests.set(slug, pendingRequest);
+	try {
+		return await pendingRequest;
+	} finally {
+		if (inFlightPostRequests.get(slug) === pendingRequest) {
+			inFlightPostRequests.delete(slug);
+		}
+	}
 }
 export async function fetchCategories() {
 	return request('/public/categories');
