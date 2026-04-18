@@ -1,4 +1,22 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api';
+function normalizeApiBaseUrl(rawValue) {
+	const fallback = '/api';
+	if (!rawValue || typeof rawValue !== 'string') {
+		return fallback;
+	}
+
+	const trimmed = rawValue.trim().replace(/\/+$/, '');
+	if (!trimmed) {
+		return fallback;
+	}
+
+	if (/^https?:\/\//i.test(trimmed)) {
+		return /\/api$/i.test(trimmed) ? trimmed : `${trimmed}/api`;
+	}
+
+	return trimmed;
+}
+
+const API_BASE_URL = normalizeApiBaseUrl(import.meta.env.VITE_API_URL ?? '/api');
 const inFlightPostRequests = new Map();
 function toQueryString(query) {
 	const params = new URLSearchParams();
