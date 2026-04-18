@@ -11,6 +11,28 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          tiptap: [
+            '@tiptap/react',
+            '@tiptap/starter-kit',
+            '@tiptap/extension-link',
+            '@tiptap/extension-image',
+            '@tiptap/extension-placeholder',
+            '@tiptap/extension-text-align',
+            '@tiptap/extension-text-style',
+            '@tiptap/extension-underline',
+            '@tiptap/extension-color',
+            '@tiptap/extension-youtube',
+          ],
+          ui: ['lucide-react', 'react-hot-toast'],
+          markdown: ['marked'],
+          validation: ['zod'],
+        },
+      },
+    },
   },
   plugins: [react()],
   resolve: {

@@ -1,303 +1,245 @@
-# Blog SaaS Platform - Production Ready
+# BlogSphere SaaS
 
-A production-grade, scalable blogging platform built with a Vite + React frontend, an Express backend, MongoDB, and modern best practices.
+BlogSphere is a full-stack blogging platform with a Vite + React frontend and an Express + MongoDB backend.
 
-## 🚀 Features
+It includes public blog pages, admin content management, comments moderation, newsletter subscriptions, contact messages, media uploads, and optional push notifications.
 
-### Core Features
-- ✅ **Blog Management**: Full CRUD operations with draft/publish workflow
-- ✅ **Comment System**: Nested replies with infinite depth and admin approval
-- ✅ **Email Subscriptions**: Double opt-in with verification
-- ✅ **Web Push Notifications**: Browser push notifications for new content
-- ✅ **Advanced Search**: Full-text search with filtering by category and tags
-- ✅ **SEO Optimized**: Dynamic sitemap, robots.txt, and metadata
-- ✅ **Analytics Dashboard**: Comprehensive admin dashboard with statistics
-- ✅ **Dark Mode**: Full dark mode support with theme persistence
-- ✅ **Responsive Design**: Mobile-first, fully responsive UI
+## Tech Stack
 
-### Technical Features
-- ✅ **Frontend Build**: Vite-powered static app optimized for Vercel
-- ✅ **MongoDB**: Optimized indexes and connection pooling
-- ✅ **Authentication**: JWT-based secure admin access
-- ✅ **Rate Limiting**: API route protection
-- ✅ **Input Sanitization**: XSS and injection prevention
-- ✅ **Image Uploads**: Cloudinary-powered media handling
-- ✅ **Markdown Support**: Full markdown rendering for blog posts
+- Frontend: React 18, Vite, Tailwind CSS
+- Backend: Express 4, Mongoose, JWT auth
+- Database: MongoDB
+- Editor: Tiptap rich text editor
+- Optional integrations: Cloudinary, SMTP, Google auth, Web Push
 
-## 📦 Tech Stack
+## Monorepo Structure
 
-- **Frontend**: Vite + React
-- **Backend**: Express.js
-- **Language**: JavaScript
-- **Database**: MongoDB with Mongoose ODM
-- **Authentication**: JWT
-- **Styling**: Tailwind CSS
-- **Validation**: Zod
-- **Email**: Nodemailer
-- **Push Notifications**: Web Push API
-- **Media**: Cloudinary
-- **Markdown**: Marked
-
-## 🛠️ Installation
-
-### Prerequisites
-- Node.js 18.17.0 or higher
-- MongoDB Atlas account (or local MongoDB)
-- SMTP server for emails (Gmail, SendGrid, etc.)
-
-### Steps
-
-1. **Clone and Install**
-```bash
-cd "c:\Web\Blog Saas - Copy - Copy"
-npm install --prefix frontend
-npm install --prefix backend
+```text
+.
+|-- backend/
+|   |-- server.js
+|   |-- src/
+|   |   |-- app.js
+|   |   |-- config/
+|   |   |-- controllers/
+|   |   |-- middleware/
+|   |   |-- models/
+|   |   |-- routes/
+|   |   |-- scripts/
+|   |   |-- services/
+|   |   `-- utils/
+|-- frontend/
+|   |-- index.html
+|   |-- vite.config.js
+|   `-- src/
+|       |-- components/
+|       |-- context/
+|       |-- hooks/
+|       |-- pages/
+|       |-- services/
+|       `-- utils/
+|-- vercel.json
+`-- README.md
 ```
 
-2. **Configure Environment Variables**
+## Prerequisites
 
-The project includes a `.env.local` file with your MongoDB URI. Update the following variables:
+- Node.js 18.17+
+- npm 9+
+- MongoDB Atlas account or local MongoDB
+
+## Installation
+
+```bash
+npm --prefix frontend install
+npm --prefix backend install
+```
+
+## Environment Variables
+
+The backend loads `.env.local` and `.env` from both the repo root and `backend/`.
+
+You can start from `backend/.env.example` and adjust values.
+
+### Required (backend)
 
 ```env
-# MongoDB
-MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/YOUR_DATABASE?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/blog-saas?retryWrites=true&w=majority
+JWT_SECRET=replace-with-a-strong-random-secret
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=change-this-password
+```
 
-# App URLs
-NEXTAUTH_URL=http://localhost:5173
-NEXTAUTH_SECRET=your-secret-key-change-this
-# Generate with: openssl rand -base64 32
+### Common (backend)
 
+```env
+PORT=5000
 APP_URL=http://localhost:5173
 FRONTEND_URL=http://localhost:5173
+```
 
-# Admin Credentials
-ADMIN_EMAIL=admin@blogplatform.com
-ADMIN_PASSWORD=Admin@123456
+### Optional Integrations (backend)
 
-# Cloudinary (Optional for images)
+```env
+# Cloudinary
 CLOUDINARY_CLOUD_NAME=your-cloud-name
 CLOUDINARY_API_KEY=your-api-key
 CLOUDINARY_API_SECRET=your-api-secret
 
-# Email SMTP
+# SMTP
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
+SMTP_SECURE=false
 SMTP_USER=your-email@gmail.com
 SMTP_PASSWORD=your-app-password
-SMTP_FROM=noreply@blogplatform.com
+SMTP_FROM=noreply@yourdomain.com
 
-# Web Push (Generate VAPID keys)
-# Run: npx web-push generate-vapid-keys
-NEXT_PUBLIC_VAPID_PUBLIC_KEY=your-public-key
-VAPID_PRIVATE_KEY=your-private-key
+# Google auth
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Web push
+VAPID_PUBLIC_KEY=your-public-vapid-key
+VAPID_PRIVATE_KEY=your-private-vapid-key
 VAPID_SUBJECT=mailto:admin@yourdomain.com
 ```
 
-3. **Generate VAPID Keys for Push Notifications**
-```bash
-npx web-push generate-vapid-keys
-```
-Copy the output to your `.env.local` file.
+### Frontend env (`frontend/.env` or `frontend/.env.local`)
 
-4. **Run Development Servers**
-```bash
-npm run dev
-npm run backend:dev
+```env
+VITE_API_URL=http://localhost:5000/api
 ```
 
-## Vercel Deployment
+For Vercel production with rewrites, you can set:
 
-The project is configured for Vercel with a static frontend build and a serverless API entrypoint.
-
-1. Set these environment variables in Vercel:
 ```env
 VITE_API_URL=/api
-MONGODB_URI=...
-JWT_SECRET=...
-ADMIN_EMAIL=...
-ADMIN_PASSWORD=...
-FRONTEND_URL=https://your-vercel-domain.vercel.app
-APP_URL=https://your-vercel-domain.vercel.app
 ```
 
-2. Deploy from the repository root. Vercel uses `vercel.json` to:
-- install frontend and backend dependencies
-- build `frontend/` into `frontend/dist`
-- route `/api/*` requests to `api/index.js`
-- serve the React app for all other routes
+## Run Locally
 
-For local development, open the frontend at http://localhost:5173 and the backend at http://localhost:5000.
-
-## 🔐 Admin Access
-
-Default admin credentials:
-- **Email**: admin@blogplatform.com
-- **Password**: Admin@123456
-
-**Important**: Change these in production via environment variables.
-
-## 📁 Project Structure
-
-```
-app/
-├── (public)/           # Public-facing pages
-│   ├── page.tsx       # Homepage
-│   ├── blog/          # Blog listing and detail
-│   ├── about/         # About page
-│   └── subscribe/     # Newsletter subscription
-├── admin/             # Admin dashboard
-│   ├── dashboard/     # Analytics dashboard
-│   ├── create/        # Create blog
-│   ├── edit/          # Edit blog
-│   └── comments/      # Comment management
-└── api/               # API routes
-    ├── blogs/         # Blog CRUD
-    ├── comments/      # Comment operations
-    ├── subscribers/   # Subscription management
-    └── push/          # Push notifications
-
-components/            # Reusable components
-lib/                   # Utility functions and services
-models/                # Mongoose models
-middleware.ts          # Route protection
-```
-
-## 🚢 Deployment
-
-The production deployment target is Vercel.
-
-### Vercel (Recommended)
-
-1. **Push to GitHub**
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin your-repo-url
-git push -u origin main
-```
-
-2. **Deploy on Vercel**
-- Go to [vercel.com](https://vercel.com)
-- Import your repository
-- Add environment variables from `.env.local`
-- Deploy
-
-### Environment Variables for Production
-
-Make sure to set all environment variables in Vercel:
-- Change `NEXTAUTH_SECRET` to a strong random string
-- Update `NEXTAUTH_URL` to your production domain
-- Change admin credentials
-- Configure SMTP settings
-- Add Cloudinary credentials
-
-## 📊 Performance Optimizations
-
-- **Database Indexes**: All frequently queried fields are indexed
-- **Connection Pooling**: MongoDB connection pooling configured
-- **ISR**: Blog pages use Incremental Static Regeneration
-- **Image Optimization**: Next/Image with Cloudinary
-- **Rate Limiting**: API routes are rate-limited
-- **Lazy Loading**: Components and images lazy-loaded
-- **Code Splitting**: Automatic code splitting by Next.js
-
-## 🔒 Security Features
-
-- **bcrypt**: Password hashing with salt rounds 12
-- **Input Sanitization**: All user inputs sanitized
-- **CSRF Protection**: NextAuth CSRF protection enabled
-- **Rate Limiting**: Prevents API abuse
-- **XSS Prevention**: DOMPurify for HTML sanitization
-- **SQL/NoSQL Injection**: Mongoose escaping + validation
-- **Secure Headers**: Helmet-style security headers in next.config.js
-
-## 📈 Scalability
-
-The platform is designed to handle 100k+ users:
-- Efficient MongoDB queries with proper indexing
-- Connection pooling (min: 2, max: 10)
-- Stateless API routes for horizontal scaling
-- Optimized aggregate queries for analytics
-- Lazy loading and code splitting
-- CDN-ready (Vercel Edge Network)
-
-## 🧪 Testing
+Run frontend and backend in separate terminals:
 
 ```bash
-# Type checking
-npm run type-check
+# Terminal 1
+npm --prefix backend run dev
 
-# Linting
-npm run lint
-
-# Build
-npm run build
+# Terminal 2
+npm --prefix frontend run dev
 ```
 
-## 📝 API Documentation
+Local URLs:
 
-### Public APIs
-- `GET /api/blogs` - List blogs (with pagination, filtering)
-- `GET /api/blogs/[slug]` - Get blog by slug
-- `POST /api/comments` - Create comment
-- `POST /api/subscribers` - Subscribe to newsletter
-- `GET /api/search` - Search blogs
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000
 
-### Admin APIs (Requires Authentication)
-- `POST /api/blogs` - Create blog
-- `PUT /api/blogs/edit/[id]` - Update blog
-- `DELETE /api/blogs/edit/[id]` - Delete blog
-- `PUT /api/comments/[id]/approve` - Approve comment
-- `DELETE /api/comments/[id]` - Delete comment
-- `GET /api/admin/analytics` - Get dashboard analytics
+## Available Scripts
 
-## 🎨 Customization
+### Backend
 
-### Branding
-- Update logo and colors in `tailwind.config.js`
-- Modify `components/Navigation.tsx` for header
-- Edit `components/Footer.tsx` for footer
+- `npm --prefix backend run dev` - start backend server
+- `npm --prefix backend run start` - start backend server (production style)
+- `npm --prefix backend run seed` - seed data
+- `npm --prefix backend run reset:views` - reset post view counters
 
-### Email Templates
-- Customize email templates in `lib/email.ts`
-- HTML templates support full styling
+### Frontend
 
-## 🐛 Troubleshooting
+- `npm --prefix frontend run dev` - start Vite dev server
+- `npm --prefix frontend run build` - build production frontend
+- `npm --prefix frontend run preview` - preview production build
+- `npm --prefix frontend run lint` - run eslint
 
-### MongoDB Connection Issues
-- Verify MongoDB URI in `.env.local`
-- Check IP whitelist in MongoDB Atlas
-- Ensure network access is configured
+## API Overview
 
-### Email Not Sending
-- Verify SMTP credentials
-- For Gmail, use App Passwords
-- Check SMTP port and security settings
+Base URL (local): `http://localhost:5000/api`
 
-### Admin Login Issues
-- Verify admin user is created (check logs)
-- Ensure NEXTAUTH_SECRET is set
-- Clear cookies and try again
+### Public routes
 
-## 📧 Support
+- `GET /health`
+- `GET /public/settings`
+- `GET /public/home`
+- `GET /public/posts`
+- `GET /public/posts/:slug`
+- `GET /public/categories`
+- `GET /public/tags`
+- `GET /public/posts/:slug/comments`
+- `POST /public/posts/:slug/comments`
+- `POST /public/newsletter/subscribe`
+- `POST /public/newsletter/unsubscribe`
+- `POST /contact`
 
-For issues or questions:
-- Check the documentation
-- Review error logs
-- Verify environment variables
+### Auth routes
 
-## 📄 License
+- `POST /auth/register`
+- `POST /auth/login`
+- `POST /auth/google`
+- `GET /auth/me`
+- `POST /auth/logout`
 
-This is a production-ready template. Feel free to use it for your projects.
+### Admin routes (JWT + admin role)
 
-## 🙏 Credits
+- `GET /admin/dashboard`
+- `GET /admin/posts`
+- `POST /admin/posts`
+- `GET /admin/posts/:id`
+- `PUT /admin/posts/:id`
+- `DELETE /admin/posts/:id`
+- `PATCH /admin/posts/:id/status`
+- `PATCH /admin/posts/:id/publish`
+- `PATCH /admin/posts/:id/feature`
+- `GET /admin/comments`
+- `PATCH /admin/comments/:id/approve`
+- `DELETE /admin/comments/:id`
+- `GET /admin/settings`
+- `PUT /admin/settings`
+- Additional admin endpoints exist for users/subscribers/messages/uploads.
 
-Built with modern web technologies and best practices for production use.
+## Deployment (Vercel)
 
----
+This repository includes `vercel.json` configured to:
 
-**Made with ❤️ for scalable, production-ready applications**
-#   B L O G S P H E R E 
- 
- 
+- install both `frontend` and `backend` dependencies
+- build the frontend into `frontend/dist`
+- serve API requests via `api/index.js`
+- rewrite all non-API routes to the SPA entry
+
+Important environment variables for deployment:
+
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+- `APP_URL`
+- `FRONTEND_URL`
+- `VITE_API_URL=/api`
+
+### Quick Deploy Checklist
+
+1. Push this repository to GitHub/GitLab/Bitbucket.
+2. In Vercel, import the repository as a new project.
+3. Keep project root at repository root (same level as `vercel.json`).
+4. Add all required environment variables in Vercel Project Settings.
+5. Set these production values:
+	- `APP_URL=https://your-domain.vercel.app`
+	- `FRONTEND_URL=https://your-domain.vercel.app`
+	- `VITE_API_URL=/api`
+6. Trigger deploy.
+
+### Post-Deploy Verification
+
+Check these endpoints after deployment:
+
+- `GET https://your-domain.vercel.app/api/health`
+- `GET https://your-domain.vercel.app/api/public/home`
+- Open `https://your-domain.vercel.app` and verify blog list loads.
+
+## Security Notes
+
+- Change default admin credentials before production.
+- Use a strong `JWT_SECRET`.
+- Restrict CORS origins via `APP_URL` and `FRONTEND_URL`.
+- Configure rate limits and SMTP/API credentials per environment.
+
+## License
+
+Private project. Add your preferred license before public distribution.

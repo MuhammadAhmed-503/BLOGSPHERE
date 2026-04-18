@@ -7,6 +7,39 @@ const { connectDatabase } = require('./src/config/database');
 const { env, getEnvHealthReport } = require('./src/config/env');
 const { bootstrapData } = require('./src/services/bootstrap');
 
+let initPromise;
+
+async function initialize() {
+  if (!initPromise) {
+    initPromise = (async () => {
+      await connectDatabase();
+      await bootstrapData();
+    })().catch((error) => {
+      initPromise = undefined;
+      throw error;
+    });
+  }
+
+  return initPromise;
+}
+
+const app = createApp();
+
+async function serverlessHandler(req, res) {
+  try {
+    await initialize();
+    return app(req, res);
+  } catch (error) {
+    console.error('Serverless initialization failed', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Server initialization failed',
+    });
+  }
+}
+
+module.exports = serverlessHandler;
+
 async function start() {
   const envHealth = getEnvHealthReport();
   console.log('Environment integrations:', envHealth.configured);
@@ -15,10 +48,7 @@ async function start() {
     console.log('Optional env not configured:', envHealth.checks.optionalMissing.join(' | '));
   }
 
-  await connectDatabase();
-  await bootstrapData();
-
-  const app = createApp();
+  await initialize();
 
   const server = app.listen(env.port, () => {
     console.log(`Backend API running on http://localhost:${env.port}`);
@@ -36,7 +66,9 @@ async function start() {
   });
 }
 
-void start().catch((error) => {
-  console.error('Failed to start backend', error);
-  process.exit(1);
-});
+if (require.main === module) {
+  void start().catch((error) => {
+    console.error('Failed to start backend', error);
+    process.exit(1);
+  });
+}

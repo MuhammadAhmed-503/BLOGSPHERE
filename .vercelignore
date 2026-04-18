@@ -2,3 +2,4 @@ node_modules/**
 .git/**
 .vscode/**
 *.log
+frontend/dist/**
