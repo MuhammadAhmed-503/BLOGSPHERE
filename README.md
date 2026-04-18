@@ -200,7 +200,7 @@ This repository includes `vercel.json` configured to:
 
 - install both `frontend` and `backend` dependencies
 - build the frontend into `frontend/dist`
-- serve API requests via `api/index.js`
+- serve API requests via `backend/server.js`
 - rewrite all non-API routes to the SPA entry
 
 Important environment variables for deployment:
@@ -222,7 +222,11 @@ Important environment variables for deployment:
 5. Set these production values:
 	- `APP_URL=https://your-domain.vercel.app`
 	- `FRONTEND_URL=https://your-domain.vercel.app`
-	- `VITE_API_URL=/api`
+	- `VITE_API_URL=/api` (single-project Vercel deployment)
+
+If you deploy frontend and backend as separate projects, set:
+
+	- `VITE_API_URL=https://your-backend-domain/api`
 6. Trigger deploy.
 
 ### Post-Deploy Verification
