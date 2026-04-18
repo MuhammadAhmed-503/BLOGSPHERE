@@ -7,6 +7,7 @@
     "dev": "vite --force --config vite.config.js",
     "build": "vite build --config vite.config.js",
     "preview": "vite preview --config vite.config.js",
+    "start": "node server.js",
     "lint": "eslint src --ext .js,.jsx"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@tiptap/extension-youtube": "^2.27.2",
     "@tiptap/react": "^2.27.2",
     "@tiptap/starter-kit": "^2.27.2",
+    "express": "^4.22.1",
     "lucide-react": "^0.368.0",
     "marked": "^12.0.0",
     "react": "^18.3.0",
